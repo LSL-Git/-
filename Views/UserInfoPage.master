@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="UserInfoPage.master.cs" Inherits="Views_UserPage" %>
+
+<%@ Register src="Footer.ascx" tagname="Footer" tagprefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Styles/UserMaster.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="header">
+        <div class="header_box clearfix">
+            <div class="logo">logo</div>
+            <div class="left_head">
+                <ul>
+                    <li>
+                        <asp:HyperLink ID="link_home" runat="server" CssClass="hyperlink" 
+                            NavigateUrl="~/User/MainPage.aspx">首页</asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="link_addT" runat="server" CssClass="hyperlink" NavigateUrl="~/User/MyEditor.aspx">发帖+</asp:HyperLink></li>
+                </ul>
+            </div>
+            <div class="right_head">
+                <h1>
+                    个人中心
+                </h1>
+            </div>
+        </div>        
+    </div>
+
+    <div class="main_content" style="height: 640px;">
+        <div class="left_content clearfix">
+            <asp:HyperLink ID="link_userinfo" runat="server" CssClass="menu hyperlink" 
+                NavigateUrl="~/User/UserInfo.aspx?type=0">基本信息</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink5" runat="server" CssClass="menu hyperlink">我的贴子</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" CssClass="menu hyperlink">我的回复</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink6" runat="server" CssClass="menu hyperlink">我的消息</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink7" runat="server" CssClass="menu hyperlink">我的兴趣</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink8" runat="server" CssClass="menu hyperlink" 
+                NavigateUrl="~/User/ChangePassword.aspx?type=1">修改密码</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink9" runat="server" CssClass="menu hyperlink">其他</asp:HyperLink>
+        </div>
+
+        <div class="right_content ">
+            <div class="rigth_content_top">
+                <asp:Label ID="ltitle" runat="server" Text="基本信息" CssClass="ltitle" 
+                    ForeColor="White"></asp:Label>
+            </div>
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">        
+            </asp:ContentPlaceHolder>
+        </div>
+        
+    </div>
+        
+    <div class="footer">
+
+        <uc1:Footer ID="Footer1" runat="server" />
+
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿body 
+{
+    padding: 0;
+    margin: 0;
+    background: #f9f9f9;
+}
+
+ul li 
+{
+    list-style: none;
+}
+
+.clearfix:after
+{
+    content:"";
+    height:0;
+    line-height:0;
+    display:block;
+    visibility:hidden;
+    clear:both;
+}
+
+.clearfix
+{
+    zoom:1;
+}
+
+.header 
+{
+    width: 100%;
+    height: 70px;
+    background: #ccc;
+}
+
+.header_box 
+{
+    width: 80%;
+    height: 70px;
+    margin: 0 auto;
+    margin-top: -16px;
+}
+
+.header .header_box .logo
+{
+    width: 100px;
+    height:auto;
+    background: #038bcb;
+    float: left;
+    padding: 22px 0;
+    margin-left: 20px;
+}
+
+.header .header_box .left_head ul li 
+{
+    float: left;
+    padding: 22px 20px;
+    margin: 0 5px;
+}
+
+.header .header_box .right_head ul li 
+{
+    float: right;
+    padding: 22px 10px;
+    margin: 0 5px;
+}
+
+.header .header_box .right_head h1
+{
+    display: inline-block;
+    float: right;
+    font-size: 25px;
+    line-height: 35px;
+    color: white;
+    margin-right: 55px;
+}
+
+.input_search 
+{
+    width: 250px;
+    height: 30px;
+    margin-top: -20px;
+    border: 1px solid #0fa5e0;
+}
+
+.input_search_but 
+{
+    width: 90px;
+    height: 33px;
+    border: none;
+    margin-top: -20px;
+    background: #038bcb;
+    color: White;
+    font-size: .94em;
+    font-family: '微软雅黑';
+}
+
+.hyperlink
+{
+    color: White;
+    font-size: 1em;
+    font-family: '微软雅黑';
+    text-decoration: none;
+}
+
+.main_content 
+{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.main_content .left_content 
+{
+    width: 23%;
+    height: 540px;    
+    float: left;
+}
+
+.menu 
+{
+    display: block;
+    width: 100%;
+    height: 27px;
+    text-align: center;
+    font-family: '微软雅黑';
+    margin: 1px 0;
+    padding: 5px 0;
+    border-radius: 7px;
+    background: #038bcb;
+    color: #fff;
+}
+
+.main_content .right_content 
+{
+    width: 75%;
+    height: 600px;
+    background: #fff;
+    float: right;
+}
+
+.main_content .right_content .rigth_content_top
+{
+    width: 100%;
+    height: 40px;
+    background: #038bcb;
+}
+
+.ltitle 
+{
+    float: right;
+    margin-right: 50px;
+    font-size: 20px;
+    line-height: 40px;
+    font-family: '微软雅黑';
+}

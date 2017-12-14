@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="UserPage.master.cs" Inherits="Views_UserPage" %>
+
+<%@ Register src="Footer.ascx" tagname="Footer" tagprefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Styles/UserMaster.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="header">
+        <div class="header_box clearfix">
+            <div class="logo">logo</div>
+            <div class="left_head">
+                <ul>
+                    <li>
+                        <asp:HyperLink ID="link_home" runat="server" CssClass="hyperlink" 
+                            NavigateUrl="~/User/MainPage.aspx">首页</asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="link_addT" runat="server" CssClass="hyperlink" NavigateUrl="~/User/MyEditor.aspx">发帖+</asp:HyperLink></li>
+                </ul>
+            </div>
+            <div class="right_head">
+                <ul>
+                    <li>
+                        <asp:LinkButton ID="link_register" runat="server" 
+                            NavigateUrl="~/User/Register.aspx" CssClass="hyperlink" 
+                            onclick="link_register_Click">注册</asp:LinkButton></li>
+                    <li>
+                        <asp:HyperLink ID="link_login" runat="server" NavigateUrl="~/User/Login.aspx" 
+                            CssClass="hyperlink">登录</asp:HyperLink></li>
+                    <li>
+                        <asp:TextBox ID="txtSearch" runat="server" CssClass="input_search"></asp:TextBox>
+                        <asp:Button ID="butSearch" runat="server" Text="搜索" 
+                            CssClass="input_search_but" />
+                    </li>                
+                </ul>
+            </div>
+        </div>        
+    </div>
+
+    <div class="main_content" style="height: 700px;">
+        <div class="left_content clearfix">
+            <asp:HyperLink ID="HyperLink10" runat="server" CssClass="menu hyperlink">自选</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink5" runat="server" CssClass="menu hyperlink">热门</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink6" runat="server" CssClass="menu hyperlink">精品</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink7" runat="server" CssClass="menu hyperlink">原创</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink8" runat="server" CssClass="menu hyperlink">排行</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink9" runat="server" CssClass="menu hyperlink">其他</asp:HyperLink>
+        </div>
+
+        <div class="right_content">
+            <div class="rigth_content_top">
+                备用区
+            </div>
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">        
+            </asp:ContentPlaceHolder>
+        </div>
+        
+    </div>
+        
+    <div class="footer">
+
+        <uc1:Footer ID="Footer1" runat="server" />
+
+    </div>
+    </form>
+</body>
+</html>

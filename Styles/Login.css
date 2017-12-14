@@ -1,0 +1,49 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background: rgb(225, 223, 223);
+}
+
+.box {
+    width: 400px;
+    height: 340px;
+    border-radius: 10px;
+    text-align: left;
+    background: white;
+    border: 1px #dddddd solid;
+    box-shadow: 0px 5px 15px 1px rgba(0,0,0,0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -170px;
+}
+
+.box-input {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.i-input {
+    width: 250px;
+    height: 30px;
+    border: 1px solid rgb(0, 38, 255);
+    padding: 0 3px;
+}
+
+.box2 {
+    width: 250px;
+    margin: 0 auto;
+}
+
+.box3 {
+    padding-top:20px;
+}
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
+}
