@@ -8,7 +8,7 @@
     <link href="../Styles/UserInfo.css" rel="stylesheet" type="text/css" />
 
     <div class="user_info_box">
-        <asp:Image ID="userIcon" runat="server" CssClass="img" Height="100px" Width="100px" />
+        <asp:Image ID="userIcon" runat="server" CssClass="img" Height="100px" Width="100px" ImageUrl="~/Image/userIcon/userIcon.jpeg" />
             <span>用户头像~</span>
         <ul>
             <li>用户名：<asp:TextBox ID="txtUserName" runat="server" Enabled="False" 

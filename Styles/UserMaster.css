@@ -40,13 +40,12 @@ ul li
     margin-top: -16px;
 }
 
-.header .header_box .logo
-{
+.header .header_box .logo {
     width: 100px;
-    height:auto;
-    background: #038bcb;
+    height: 70px;
+    background-image: url('../Image/logo.png');
+    background-size: cover;
     float: left;
-    padding: 22px 0;
     margin-left: 20px;
 }
 

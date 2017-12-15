@@ -6,8 +6,8 @@ using System.Web;
 /// <summary>
 /// ArticleType 的摘要说明
 /// </summary>
-public class ArticleType
+public class ArticleTag
 {
     public int typeId;
-    public string type;
+    public string Tag;
 }

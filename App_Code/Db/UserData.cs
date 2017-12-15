@@ -10,12 +10,19 @@ using System.Web;
 /// </summary>
 public class UserData
 {
+    // 检查用户名是否存在
     private const string CHECK_USERNAME = " SELECT * FROM [User] WHERE [userName] = '{0}' ";
-    private const string USER_REGISTER = " INSERT INTO [User]([userName], [userPsw], [userTel], [admin]) VALUES ('{0}','{1}','{2}','{3}')";
+    // 用户注册
+    private const string USER_REGISTER = " INSERT INTO [User]([userName], [userPsw], [userTel], [admin], " +
+        "[register_time]) VALUES ('{0}','{1}','{2}','{3}','{4}')";
+    // 用户登录
     private const string USER_LOGIN = "SELECT * FROM [User] WHERE [userName] = '{0}' AND [userPsw] = '{1}'";
+    // 通过用户名获取用户所有信息
     private const string GET_USERINFO_BY_USERNAME = " SELECT * FROM [User] WHERE [userName] = '{0}'";
+    // 更新用户信息
     private const string UPDATE_USERINFO = "UPDATE [User] SET userName = '{0}', userTel = '{1}', userEmail = '{2}'"
         + ", sex = '{3}', education = '{4}', birth = '{5}', sketch = '{6}', img = '{7}' WHERE userName = '{8}'";
+    // 更新用户密码
     private const string CHANGE_PASSWORD_BY_USERNAME = " UPDATE [User] SET [userPsw] = '{0}' WHERE [userName] = '{1}' ";
 
     /// <summary>
@@ -70,6 +77,7 @@ public class UserData
         if (reader.Read())
         {
             User userInfo = new User();
+            userInfo.userID = (int)reader["userID"];
             userInfo.userName = reader["userName"] + "";
             userInfo.userPsw = reader["userPsw"] + "";
             userInfo.userTel = reader["userTel"] + "";
@@ -81,6 +89,8 @@ public class UserData
             userInfo.Admin = reader["admin"] + "";
             userInfo.Img = reader["img"] + "";
             userInfo.Exp = (int)reader["userExp"];
+            userInfo.register_time = reader["register_time"] + "";
+            reader.Close();
             return userInfo;
         }
         else
@@ -128,7 +138,8 @@ public class UserData
         OleDbDataReader reader = cmd.ExecuteReader();
         if (!reader.Read())
         {
-            string sql_Register = String.Format(USER_REGISTER, username, userpsw, usertel, "user");
+            string sql_Register = String.Format(USER_REGISTER, username, userpsw, usertel,
+                "user", DateUtils.GetNowTime());
             OleDbCommand cmd2 = new OleDbCommand(sql_Register, conn);
             cmd2.ExecuteNonQuery();
             result = true;

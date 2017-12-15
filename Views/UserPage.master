@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>首页</title>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="../Styles/UserMaster.css" rel="stylesheet" type="text/css" />
@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
     <div class="header">
         <div class="header_box clearfix">
-            <div class="logo">logo</div>
+            <div class="logo"></div>
             <div class="left_head">
                 <ul>
                     <li>

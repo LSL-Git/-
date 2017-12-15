@@ -50,11 +50,5 @@ public class DBHelper
             _conn.Close();
         }
     }
-    // 根据当前时间产生一个序列号
-    public long GetNumberByTime()
-    {
-        DateTime dateTime = new DateTime();
-        string number = dateTime.ToString("yyyyMMddHHmmss") + dateTime.Millisecond.ToString("D3");
-        return long.Parse(number);
-    }
+   
 }

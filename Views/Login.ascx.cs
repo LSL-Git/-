@@ -7,8 +7,6 @@ using System.Web.UI.WebControls;
 
 public partial class Views_Login : System.Web.UI.UserControl
 {
-    // 创建编码解码器对象,可避免存储中文乱码
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)

@@ -25,9 +25,11 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string psw = EnCondingMD5(TextBox1.Text.Trim());
+        //string psw = EnCondingMD5(TextBox1.Text.Trim());
 
-        Label1.Text = psw;
+        //Label1.Text = psw;
+        //Draft draft = DraftHelper.GetDraftById(2, 8);
+        //Label1.Text = draft.Content;
 
     }
 
@@ -41,5 +43,10 @@ public partial class _Default : System.Web.UI.Page
         {
             Label2.Text = "比对失败";
         }
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        string c = content.Text.ToString();
     }
 }

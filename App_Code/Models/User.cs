@@ -8,7 +8,7 @@ using System.Web;
 /// </summary>
 public class User
 {
-    public string userID;
+    public int userID;
     public string userName;
     public string userPsw;
     public string userTel;
@@ -20,4 +20,5 @@ public class User
     public string Admin;
     public string Img;
     public int Exp; // 积分
+    public string register_time; // 注册时间
 }

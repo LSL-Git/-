@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
     <div class="header">
         <div class="header_box clearfix">
-            <div class="logo">logo</div>
+            <div class="logo"></div>
             <div class="left_head">
                 <ul>
                     <li>
@@ -41,7 +41,8 @@
             <asp:HyperLink ID="HyperLink1" runat="server" CssClass="menu hyperlink">我的回复</asp:HyperLink>
             <asp:HyperLink ID="HyperLink6" runat="server" CssClass="menu hyperlink">我的消息</asp:HyperLink>
             <asp:HyperLink ID="HyperLink7" runat="server" CssClass="menu hyperlink">我的兴趣</asp:HyperLink>
-            <asp:HyperLink ID="HyperLink8" runat="server" CssClass="menu hyperlink" 
+            <asp:HyperLink ID="link_my_draft" runat="server" CssClass="menu hyperlink" NavigateUrl="~/User/MyDraft.aspx?type=2">我的草稿</asp:HyperLink>
+            <asp:HyperLink ID="link_change_psw" runat="server" CssClass="menu hyperlink" 
                 NavigateUrl="~/User/ChangePassword.aspx?type=1">修改密码</asp:HyperLink>
             <asp:HyperLink ID="HyperLink9" runat="server" CssClass="menu hyperlink">其他</asp:HyperLink>
         </div>

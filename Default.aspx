@@ -7,6 +7,12 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <link href="../kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+    <script src="../kindeditor/plugins/code/prettify.js"></script>
+    <script src="../kindeditor/kindeditor-all.js"></script>
+    <script src="../kindeditor/lang/zh-CN.js"></script>
+    <script src="../kindeditor/kindeditor-all-min.js"></script>
+    <script src="Scripts/mykindeditor.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,7 +28,10 @@
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="对比" />
             <br />
             对比结果：<asp:Label ID="Label2" runat="server" Text=""></asp:Label>
-            
+            <br />
+            <asp:TextBox ID="content" runat="server" TextMode="MultiLine"></asp:TextBox>
+            <br />
+            <asp:Button ID="Button3" runat="server" Text="Button" OnClick="Button3_Click" />
         </div>
     </form>
 </body>

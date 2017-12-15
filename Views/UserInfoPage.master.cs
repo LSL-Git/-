@@ -29,6 +29,10 @@ public partial class Views_UserPage : System.Web.UI.MasterPage
                 ltitle.Text = "修改密码";
                 break;
 
+            case "2":
+                ltitle.Text = "我的草稿";
+                break;
+
             default:
                 break;
         }
