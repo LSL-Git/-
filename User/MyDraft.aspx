@@ -6,7 +6,7 @@
     <br />
     <asp:Repeater ID="Repeater_Draft" runat="server" OnItemCommand="Repeater_Draft_ItemCommand" OnItemDataBound="Repeater_Draft_ItemDataBound" >
         <HeaderTemplate>
-            <table style="width: 90%;  margin: 10px auto; border-spacing: 0;">
+            <table style="width: 95%;  margin: 10px auto; border-spacing: 0;">
                 <thead>
                     <tr style="height: 40px; background: #dfdfdf; color: #042532;">
                         <th style="width:40%; text-align: left; padding-left: 15px;">标题</th>

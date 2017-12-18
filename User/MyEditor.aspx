@@ -11,13 +11,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>编辑器</title>    
     <link href="../kindeditor/plugins/code/prettify.css" rel="stylesheet" />
-    <script src="../kindeditor/plugins/code/prettify.js"></script>
-    <script src="../kindeditor/kindeditor-all.js"></script>
-    <script src="../kindeditor/lang/zh-CN.js"></script>
-    <script src="../kindeditor/kindeditor-all-min.js"></script>
+    <script type="text/javascript" src="../kindeditor/plugins/code/prettify.js"></script>
+    <script type="text/javascript" src="../kindeditor/kindeditor-all.js"></script>
+    <script type="text/javascript" src="../kindeditor/lang/zh-CN.js"></script>
+    <script type="text/javascript" src="../kindeditor/kindeditor-all-min.js"></script>
     <link href="../Styles/Editor.css" rel="stylesheet" />
     <link href="../Styles/UserMaster.css" rel="stylesheet" />
-    <script src="../Scripts/mykindeditor.js"></script>
+    <script type="text/javascript" src="../Scripts/mykindeditor.js"></script>
 </head>
 <body>
     <form id="form1" runat="server" name="example">
@@ -60,7 +60,7 @@
             <div class="box_bottom">
                 <asp:Button ID="butPublish" runat="server" Text="发表" OnClick="butPublish_Click" CssClass="but_publish" />
                 &nbsp;&nbsp;<asp:Button ID="butSaveDraft" runat="server" Text="存为草稿~" BackColor="White" BorderStyle="None" Font-Size="17px" ForeColor="#999999" OnClick="butSaveDraft_Click" style="height: 23px" />
-                &nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Err_Msg" runat="server" ForeColor="#FF9900"></asp:Label>
+                &nbsp;&nbsp;<asp:Label ID="Err_Msg" runat="server" ForeColor="#FF9900"></asp:Label>
                 &nbsp;&nbsp;<asp:HyperLink ID="link_login" runat="server" Font-Underline="False" NavigateUrl="~/User/Login.aspx" ForeColor="#00CC00" Target="_blank" Visible="False">前往登录</asp:HyperLink>
                 <div class="article_type type">
                     <asp:Label ID="Article_Tag" runat="server" Text="选择标签：" Font-Size="17px"></asp:Label>

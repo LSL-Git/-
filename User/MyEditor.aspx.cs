@@ -48,7 +48,7 @@ public partial class User_MyEditor : System.Web.UI.Page
         ArticleTagList.DataValueField = "tag";
         ArticleTagList.DataBind();
         // 设置第一项为空项
-        ArticleTagList.Items.Insert(0, new ListItem("", ""));
+        //ArticleTagList.Items.Insert(0, new ListItem("", ""));
         data.Dispose(); // 释放data中的资源
         article_type.Dispose(); // 释放article_type中的资源
     }
@@ -121,8 +121,47 @@ public partial class User_MyEditor : System.Web.UI.Page
     
     protected void butPublish_Click(object sender, EventArgs e)
     {
-        GetArticleInfo();
+        if (UserInfo())
+        {
+            GetArticleInfo(); // 获取输入信息
 
+            userName = HttpUtility.UrlDecode(Request.Cookies["USERINFO"]["NAME"]);
+            User user = UserHelper.GetUserInfoByUserName(userName); // 获取用户信息
+
+            Article articleInfo = new Article();
+            articleInfo.User_id = user.userID;
+            articleInfo.Title = article_title;
+            articleInfo.Content = article_content;
+            articleInfo.Type = article_type;
+            articleInfo.Tag = article_tag;
+            articleInfo.Pub_time = DateUtils.GetNowTime();
+            articleInfo.Juri = "待审核"; // 默认'待审核'->'已审核'
+            articleInfo.State = "正常";
+
+            if (ArticleHelper.InsertNewArticle(articleInfo)) // 判断发表结果
+            {
+                // 获取刚保存的文章的相关信息
+                Article article = ArticleHelper.GetTheNewArticleByUserId(articleInfo.User_id);
+                if (article != null)
+                {
+                    // 创建新的文章其他信息表，并保存
+                    ArticleInfo articleIn = new ArticleInfo();
+                    articleIn.Comment_time = DateUtils.GetNowTime();
+                    ArticleInfoHelper.InsertArticleInfoByarticleId(article.ID, articleIn);
+                }
+
+                //if (UserArticleInfoHelper.GetArticleInfoByUserId(articleInfo.User_id) == null)
+                //{}
+                
+                UserArticleInfoHelper.SetNumByUserId(articleInfo.User_id, 1);                
+
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('发表成功！')", true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('发表失败！')", true);
+            }
+        }
     }
 
     protected void butSaveDraft_Click(object sender, EventArgs e)
@@ -153,7 +192,19 @@ public partial class User_MyEditor : System.Web.UI.Page
                     draft.Tag = article_tag;
                     draft.create_time = DateUtils.GetNowTime();
 
-                    if (DraftHelper.InsertNewDraft(draft))
+                    if (draftId != null && draftId != "" && Regex.IsMatch(draftId, @"^\d+$"))
+                    {
+                        // 更新草稿
+                        if (DraftHelper.UpdateDraft(draft, user.userID, int.Parse(draftId)))
+                        {
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('草稿保存成功！')", true);
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('草稿保存失败！')", true);
+                        }
+                    }
+                    else if (DraftHelper.InsertNewDraft(draft))
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('草稿保存成功！')", true);
                     }

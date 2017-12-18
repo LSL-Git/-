@@ -34,10 +34,18 @@ public class UserData
     /// <returns></returns>
     public static bool UpdateUserPasswordByUserName(string userName, string userPsw, OleDbConnection conn)
     {
-        string sql = String.Format(CHANGE_PASSWORD_BY_USERNAME, userPsw, userName);
-        OleDbCommand cmd = new OleDbCommand(sql, conn);
-        cmd.ExecuteNonQuery();
-        return true;
+        try
+        {
+            string sql = String.Format(CHANGE_PASSWORD_BY_USERNAME, userPsw, userName);
+            OleDbCommand cmd = new OleDbCommand(sql, conn);
+            int row = cmd.ExecuteNonQuery();
+            return row > 0;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        
     }
 
     /// <summary>
@@ -57,10 +65,18 @@ public class UserData
     public static bool UpdateUserInfoByUserName(string name, string tel, string email, string sex, string edu,
         string birth, string imgUrl, string ske, string orname, OleDbConnection conn)
     {
-        string sql = String.Format(UPDATE_USERINFO, name, tel, email, sex, edu, birth, ske, imgUrl,orname);
-        OleDbCommand cmd = new OleDbCommand(sql, conn);
-        cmd.ExecuteNonQuery();
-        return true;        
+        try
+        {
+            string sql = String.Format(UPDATE_USERINFO, name, tel, email, sex, edu, birth, ske, imgUrl,orname);
+            OleDbCommand cmd = new OleDbCommand(sql, conn);
+            int row = cmd.ExecuteNonQuery();
+            return row > 0;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+                
     }
 
     /// <summary>
@@ -102,17 +118,17 @@ public class UserData
     // 使用阅读器向数据表格填充数据
     public static DataTable FillUserInfo(OleDbConnection conn)
     {
-        string sql = "SELECT [ID]," +
-            "[userName] AS [用户名]," +
-            "[userPsw] AS [密码]," +
-            "[userTel] AS [联系方式]," +
-            "[userEmail] AS [邮箱]," +
-            "[education] AS [学历]," +
-            "[sex] AS [性别]," +
-            "[birth] AS [生日]," +
-            "[sketch] AS [简介]," +
-            "[admin] AS [身份]," +
-            "[img] AS [图片名称]" +
+        string sql = "SELECT " +
+            "[userName] AS [用户名] " +
+            //"[userPsw] AS [密码]," +
+            //"[userTel] AS [联系方式]," +
+            //"[userEmail] AS [邮箱]," +
+            //"[education] AS [学历]," +
+            //"[sex] AS [性别]," +
+            //"[birth] AS [生日]," +
+            //"[sketch] AS [简介]," +
+            //"[admin] AS [身份]," +
+            //"[img] AS [图片名称]" +
             "FROM [User]";
         OleDbCommand cmd = new OleDbCommand(sql,conn);
         OleDbDataReader reader = cmd.ExecuteReader();

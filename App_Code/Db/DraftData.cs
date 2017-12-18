@@ -11,8 +11,8 @@ using System.Web;
 public class DraftData
 {
     // 插入草稿信息
-    private const string INSERT_DRAFT = " INSERT INTO [Draft]([userID], [Title], [Content], [Type], " +
-        "[Tag], [create_time]) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}') ";
+    private const string INSERT_DRAFT = " INSERT INTO [Draft] ([userID], [Title], [Content], [Type], " +
+        "[Tag], [create_time]) VALUES ({0}, '{1}', \'{2}\', '{3}', '{4}', '{5}') ";
 
     // 根据用户id获取用户的所有草稿信息 根据create_time降序
     private const string GET_ALL_DRAFT_BY_USERID = " SELECT * FROM [Draft] WHERE [userID] = {0} " +
@@ -23,6 +23,34 @@ public class DraftData
 
     // 根据草稿id和用户id获取草稿信息
     private const string GET_DRAFT_BY_USERID_AND_ID = " SELECT * FROM [Draft] WHERE [ID] = {0} AND [userID] = {1} ";
+
+    // 更新草稿
+    private const string UPDATE_DRAFT_BY_USERID_DRAFTID = " UPDATE [Draft] SET [Title] = '{0}', [Content] = '{1}', " +
+        " [Type] = '{2}', [Tag] = '{3}', [create_time] = '{4}' WHERE [ID] = {5} AND [userID] = {6} ";
+
+    /// <summary>
+    /// 根据用户ID和草稿ID更新草稿内容
+    /// </summary>
+    /// <param name="draft"></param>
+    /// <param name="userId"></param>
+    /// <param name="draftId"></param>
+    /// <param name="conn"></param>
+    /// <returns></returns>
+    public static bool UpdateDraftById(Draft draft, int userId, int draftId, OleDbConnection conn)
+    {
+        try
+        {
+            string sql = String.Format(UPDATE_DRAFT_BY_USERID_DRAFTID, draft.Title, draft.Content.Replace("'", "‘"),
+                draft.Type, draft.Tag, draft.create_time, draftId, userId );
+            OleDbCommand cmd = new OleDbCommand(sql, conn);
+            int row = cmd.ExecuteNonQuery();
+            return row > 0;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
 
     /// <summary>
     /// 根据草稿id和用户id获取草稿信息
@@ -70,8 +98,8 @@ public class DraftData
         {
             string sql = String.Format(DELETE_DRAFT_BY_ID, id);
             OleDbCommand cmd = new OleDbCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            return true;
+            int row = cmd.ExecuteNonQuery();
+            return row > 0;
         }
         catch (Exception)
         {
@@ -90,10 +118,10 @@ public class DraftData
         try
         {
             string sql = String.Format(INSERT_DRAFT, darft.userId, darft.Title,
-                        darft.Content, darft.Type, darft.Tag, darft.create_time);
+                        darft.Content.Replace("'","‘"), darft.Type, darft.Tag, darft.create_time);
             OleDbCommand cmd = new OleDbCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            return true;
+            int row = cmd.ExecuteNonQuery();
+            return row > 0;
         }
         catch (Exception)
         {

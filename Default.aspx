@@ -32,6 +32,9 @@
             <asp:TextBox ID="content" runat="server" TextMode="MultiLine"></asp:TextBox>
             <br />
             <asp:Button ID="Button3" runat="server" Text="Button" OnClick="Button3_Click" />
+            <br />
+            <asp:GridView ID="GridView1" runat="server">
+            </asp:GridView>
         </div>
     </form>
 </body>

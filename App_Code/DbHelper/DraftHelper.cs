@@ -13,6 +13,25 @@ public class DraftHelper
     private static Object mLockObj = new Object();
 
     /// <summary>
+    /// 更新草稿
+    /// </summary>
+    /// <param name="draft"></param>
+    /// <param name="userId"></param>
+    /// <param name="draftId"></param>
+    /// <returns></returns>
+    public static bool UpdateDraft(Draft draft, int userId, int draftId)
+    {
+        bool result = false;
+        lock (mLockObj)
+        {
+            mdb.Connect();
+            result = DraftData.UpdateDraftById(draft, userId, draftId, mdb.GetConn);
+            mdb.Disconnect();
+        }
+        return result;
+    }
+
+    /// <summary>
     /// 保存新建草稿
     /// </summary>
     /// <param name="draft"></param>

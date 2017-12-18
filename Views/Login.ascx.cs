@@ -62,6 +62,11 @@ public partial class Views_Login : System.Web.UI.UserControl
                 // 保存cookie
                 SetCookie(user.userName, user.userPsw);
             }
+            else
+            {
+                SetCookie(user.userName, "");
+            }
+            
             Response.Redirect("MainPage.aspx");
         }
         else

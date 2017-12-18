@@ -45,6 +45,10 @@ public partial class Views_Register : System.Web.UI.UserControl
                         // 保存用户信息，并对密码进行加密
                         if (UserHelper.Register(newuser, MD5Encryption.EnCondingMD5(newpsw), newtel))
                         {
+                            UserArticleInfo articleInfo = new UserArticleInfo();
+                            User user = UserHelper.GetUserInfoByUserName(newuser); // 获取新用户信息，以便获取用户ID
+                            UserArticleInfoHelper.InsertNewArticleInfo(user.userID, articleInfo); // 新建用户发文概况信息
+
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "",
                                 "alert('注册成功！前往登录...');window.location.href='Login.aspx'", true);
                         }

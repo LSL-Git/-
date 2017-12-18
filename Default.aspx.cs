@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -25,11 +26,18 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        //string psw = EnCondingMD5(TextBox1.Text.Trim());
 
-        //Label1.Text = psw;
-        //Draft draft = DraftHelper.GetDraftById(2, 8);
-        //Label1.Text = draft.Content;
+        ////UserArticleInfo info = new UserArticleInfo();
+        //Article article = ArticleHelper.GetTheNewArticleByUserId(8);
+        //Label1.Text = article.ID + "";
+
+        DBHelper mdb = new DBHelper();
+        mdb.Connect();
+        DataTable table = MyPostUtils.GetMyPostInfoByUserID(8, mdb.GetConn);
+        mdb.Disconnect();
+
+        GridView1.DataSource = table;
+        GridView1.DataBind();
 
     }
 

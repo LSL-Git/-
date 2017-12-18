@@ -33,6 +33,10 @@ public partial class Views_UserPage : System.Web.UI.MasterPage
                 ltitle.Text = "我的草稿";
                 break;
 
+            case "3":
+                ltitle.Text = "我的帖子";
+                break;
+
             default:
                 break;
         }
