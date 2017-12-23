@@ -150,6 +150,9 @@ public partial class User_MyPost : System.Web.UI.Page
             mdb.Disconnect();
             if (result)
             {
+                User user = GetUserInfo();
+                // 用户删除文章数 +1
+                UserArticleInfoHelper.SetNumByUserId(user.userID, 2);
                 Response.Redirect("MyPost.aspx?type=3");
             }
             else

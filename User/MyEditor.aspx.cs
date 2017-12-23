@@ -120,7 +120,7 @@ public partial class User_MyEditor : System.Web.UI.Page
             txtTitle.Text = row["Title"].ToString();
             content.Text = row["Content"].ToString();
             ArticleTypeList.Text = row["Type"].ToString();
-            ArticleTagList.Text = row["Tag"].ToString();            
+            ArticleTagList.Text = row["Tag"].ToString();
         }
 
         butPublish.Text = "保存";
@@ -149,9 +149,9 @@ public partial class User_MyEditor : System.Web.UI.Page
             }
         }
 
-        
+
     }
-    
+
     protected void butPublish_Click(object sender, EventArgs e)
     {
         if (UserInfo())
@@ -188,7 +188,7 @@ public partial class User_MyEditor : System.Web.UI.Page
                         // 用户发表文章数 +1
                         UserArticleInfoHelper.SetNumByUserId(articleInfo.User_id, 1);
 
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')"  +
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')" +
                             ";window.location.href='MyPost.aspx?type=3'", true);
 
                     }
@@ -209,7 +209,7 @@ public partial class User_MyEditor : System.Web.UI.Page
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')", true);
                     }
                     break;
-            }          
+            }
         }
     }
 
@@ -265,7 +265,7 @@ public partial class User_MyEditor : System.Web.UI.Page
                 else
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('请先登录！')", true);
-                }              
+                }
             }
         }
     }

@@ -7,9 +7,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.OleDb;
 
 public partial class _Default : System.Web.UI.Page
 {
+    private const string GET_FLOOR_NUM = " SELECT COUNT(*) FROM [ArticleComment] WHERE [ArticleID] = {0} ";
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -31,13 +34,18 @@ public partial class _Default : System.Web.UI.Page
         //Article article = ArticleHelper.GetTheNewArticleByUserId(8);
         //Label1.Text = article.ID + "";
 
+        
+
         DBHelper mdb = new DBHelper();
         mdb.Connect();
-        DataTable table = MyPostUtils.GetMyPostInfoByUserID(8, mdb.GetConn);
+        string sql2 = String.Format(GET_FLOOR_NUM, 54);
+        OleDbCommand cmd2 = new OleDbCommand(sql2, mdb.GetConn);
+        int newFloor = (int)cmd2.ExecuteScalar() + 1;
         mdb.Disconnect();
 
-        GridView1.DataSource = table;
-        GridView1.DataBind();
+        Label1.Text = newFloor + "";
+        //GridView1.DataSource = table;
+        //GridView1.DataBind();
 
     }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/ArticleInfo.master" AutoEventWireup="true" CodeFile="ShowArticle.aspx.cs" Inherits="User_ShowArticle"  ValidateRequest="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/ArticleInfo.master" AutoEventWireup="true" CodeFile="ShowArticle.aspx.cs" Inherits="User_ShowArticle" ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link href="../kindeditor/plugins/code/prettify.css" rel="stylesheet" />
@@ -55,7 +55,9 @@
             <asp:Label ID="ArticleContent" runat="server" Text="没有该文~！" CssClass="article_content"></asp:Label>
         </div>
     </div>
-
+    <div style="width: 100%; height: 40px; background: #fff; text-align: center;">
+        <asp:Label ID="LMsg2" runat="server" Text="该帖子还没有评论！期待你的神评~" Visible="false"></asp:Label>
+    </div>
 
     <asp:Repeater ID="Repeater_Comment" runat="server">
         <ItemTemplate>
@@ -64,27 +66,37 @@
                     <div style="width: 100%; height: 10px; background: #f3f3f3; /*border-top: 1px solid #ccc; */"></div>
                     <div class="comment_main">
                         <div class="comment_user">
-                            <asp:Image ID="Comm_Icon" runat="server" ImageUrl="~/Image/userIcon/userIcon.jpeg" CssClass="comm_icon" />
-                            <asp:LinkButton ID="Link_UserName" runat="server" CssClass="comm_name">LinkButton</asp:LinkButton>
-                            <asp:Label ID="L_Floor" runat="server" Text="1楼" CssClass="label1"></asp:Label>
+                            <asp:Image ID="Comm_Icon" runat="server"
+                                ImageUrl='<%#DataBinder.Eval(Container.DataItem, "img")%>' CssClass="comm_icon" />
+
+                            <asp:LinkButton ID="Link_UserName" runat="server" CommandName="LookUser" ToolTip='<%#DataBinder.Eval(Container.DataItem, "userName")%>'
+                                CommandArgument='<%#DataBinder.Eval(Container.DataItem, "Comment_UserID")%>'
+                                CssClass="comm_name"><%#DataBinder.Eval(Container.DataItem, "userName")%></asp:LinkButton>
+
+                            <asp:Label ID="L_Floor" runat="server" CssClass="label1"><%#DataBinder.Eval(Container.DataItem, "Floor")%>楼</asp:Label>
                         </div>
                         <div class="comm_content">
-                            <asp:Label ID="Comm_Content" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Comm_Content" runat="server"
+                                Text='<%#DataBinder.Eval(Container.DataItem, "Comment_Content")%>'></asp:Label>
                         </div>
 
                         <div class="comm_other">
                             <ul>
                                 <li>
-                                    <asp:LinkButton ID="Link_Report" runat="server">举报</asp:LinkButton>
+                                    <asp:LinkButton ID="Link_Report" runat="server" CommandName="Report" Font-Underline="false" ToolTip="举报"
+                                        ForeColor="#8b8b8b" CommandArgument='<%#DataBinder.Eval(Container.DataItem, "Comment_UserID")%>'>举报</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="Link_Del" runat="server">删除</asp:LinkButton>
+                                    <asp:LinkButton ID="Link_Del" runat="server" CommandName="DelComm" ToolTip="删除评论" Font-Underline="false"
+                                        CommandArgument='<%#DataBinder.Eval(Container.DataItem, "ID")%>' ForeColor="#8b8b8b">删除</asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:Label ID="LComm_Time" runat="server" Text="回复时间"></asp:Label>
+                                    <asp:Label ID="LComm_Time" runat="server" ToolTip="评论时间" Font-Underline="false" ForeColor="#8b8b8b">
+                                        评论于：<%#DataBinder.Eval(Container.DataItem, "Comment_Time")%></asp:Label>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="Link_Comm" runat="server">回复</asp:LinkButton>
+                                    <asp:LinkButton ID="Link_Comm" runat="server" CommandName="Reply" ToolTip="回复" Font-Underline="false"
+                                        CommandArgument='<%#DataBinder.Eval(Container.DataItem, "Comment_UserID")%>'>回复</asp:LinkButton>
                                 </li>
                             </ul>
                         </div>
@@ -103,7 +115,7 @@
     </div>--%>
 
                 <asp:Label ID="Label1" runat="server" Text="发表评论" CssClass="comm_name"></asp:Label>
-                <span class="span2">回复：<asp:DropDownList ID="DropDownList1" runat="server">
+                <span class="span2">回复：<asp:DropDownList ID="FloorList" runat="server">
                     <asp:ListItem Selected="True">楼主</asp:ListItem>
                     <asp:ListItem>1楼</asp:ListItem>
                 </asp:DropDownList></span>
@@ -135,14 +147,14 @@
 
                 <div class="comm_userLogin">
                     <asp:Label ID="LUserName" runat="server" Text="用户名：" Visible="false"></asp:Label>
-                    <asp:TextBox ID="userName" runat="server"  Visible="false"></asp:TextBox>
+                    <asp:TextBox ID="txtUserName" runat="server" Visible="false"></asp:TextBox>
                     &nbsp;&nbsp;
                     <asp:Label ID="LPassword" runat="server" Text="密码：" Visible="false"></asp:Label>
-                    <asp:TextBox ID="Password" runat="server" TextMode="Password" Visible="false"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Visible="false"></asp:TextBox>
                     &nbsp;&nbsp;
-                    <asp:Button ID="Bnt_Login" runat="server" Text="登录" CssClass="but_comm"  Visible="false"/>
+                    <asp:Button ID="Bnt_Login" runat="server" Text="登录" CssClass="but_comm" Visible="false" />
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 

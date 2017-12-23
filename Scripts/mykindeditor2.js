@@ -1,9 +1,9 @@
 ﻿KindEditor.ready(function (K) {
     var editor = K.create('#ContentPlaceHolder1_content', {
         //上传管理
-        uploadJson: '~/kindeditor/asp.net/upload_json.ashx',
+        uploadJson: 'kindeditor/asp.net/upload_json.ashx',
         //文件管理
-        fileManagerJson: '~/kindeditor/asp.net/file_manager_json.ashx',
+        fileManagerJson: 'kindeditor/asp.net/file_manager_json.ashx',
         // 是否允许文件管理
         allowFileManager: true,
         //设置编辑器创建后执行的回调函数

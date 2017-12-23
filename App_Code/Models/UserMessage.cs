@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-///Comment 的摘要说明
+/// UserMessage 的摘要说明
 /// </summary>
-public class Comment
+public class UserMessage
 {
     public int ID;
+    public int UserID;
     public int ArticleID;
-    public int Comm_userID;
+    public string bComm_Content;
+    public int Comm_UserID;
     public string Comm_Content;
     public string Comm_Time;
-    public int Floor; // 楼层
+    public string State; // 未读|已读
 }
