@@ -1,5 +1,5 @@
 ﻿KindEditor.ready(function (K) {
-    var editor = K.create('#content', {
+    var editor = K.create('#ContentPlaceHolder1_content', {
         //上传管理
         uploadJson: '~/kindeditor/asp.net/upload_json.ashx',
         //文件管理
@@ -27,17 +27,14 @@
         // 设置编辑器宽度不可调，如果指为0这宽度，高度都不可调
         resizeType: 1,
         //编辑器高度
-        height: '500px;',
+        height: '160px;',
         //配置编辑器的工具栏
         items: [
-            'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
-            'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-            'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-            'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+            'source', '|', 'undo', 'redo', '|', 'preview', 'emoticons', 'code', 'cut', 'copy', 'paste',
+            'plainpaste', 'wordpaste', '|',
             'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-            'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
-            'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-            'anchor', 'link', 'unlink', '|', 'about'
+            'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+            'flash', 'media', 'hr',  'baidumap', 'link', 'unlink', '|'
         ]
     });
     prettyPrint();

@@ -48,6 +48,24 @@ public class UserHelper
         return result;
     }
 
+
+    /// <summary>
+    /// 执行查询用户信息业务
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
+    public static User GetUserInfoByUserID(int userId)
+    {
+        User userInfo = null;
+        lock (mLockObj)
+        {
+            mdb.Connect();
+            userInfo = UserData.GetUserInfoByUserID(userId, mdb.GetConn);
+            mdb.Disconnect();
+        }
+        return userInfo;
+    }
+
     /// <summary>
     /// 执行查询用户信息业务
     /// </summary>

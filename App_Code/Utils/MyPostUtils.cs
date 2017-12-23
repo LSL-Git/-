@@ -15,35 +15,38 @@ public class MyPostUtils
       "[Comment_Num], [Pub_Time] FROM Article LEFT JOIN ArticleInfo ON ArticleInfo.ArticleID=Article.ID WHERE UserID = {0} ";
 
     // 获取MyPostInfo表内指定连续范围的列
-    private const string GET_POST_INFO_BY_ORDERS = "SELECT * FROM (SELECT TOP {0} * FROM (SELECT TOP {1} * FROM [MyPostInfo] ORDER BY " +
-        " [ArticleID] ASC) ORDER BY [ArticleID] DESC) WHERE [UserID] = {2} ORDER BY [ArticleID] ASC ";
+    private const string GET_POST_INFO_BY_ORDERS = "SELECT * FROM (SELECT TOP {0} * FROM (SELECT TOP {1} * FROM [MyPostInfo] " +
+        " WHERE [UserID] = {2} {3} ORDER BY [ArticleID] DESC) {4} ORDER BY [ArticleID] ASC) ORDER BY [ArticleID] DESC ";
 
     // 根据用户ID获取用户的所有文章数量
     private const string GET_USER_ARTICLE_COUNT_BY_USERID = " SELECT COUNT(*) AS N FROM [Article] WHERE [UserID] = {0} ";
 
     // 获取用户已有文章的所有标签
-    private const string GET_USER_ARTICLE_TAG_BY_USERID = "SELECT DISTINCT [Tag] FROM [Article] WHERE [UserID] = {0} ";
+    private const string GET_USER_ARTICLE_TAG_BY_USERID = " SELECT DISTINCT [Tag] FROM [Article] WHERE [UserID] = {0} ";
+
+    private const string ADD_TYPE = " AND [Type] = '{0}' ";
+    private const string ADD_TAG = " WHERE [Tag] = '{0}' ";
+
+    private static string TOTAL = "全部";
 
     /// <summary>
+    /// 根据用户id和制定文章类型
     /// 获取用户已有文章的所有标签
     /// </summary>
     /// <param name="userID"></param>
     /// <param name="conn"></param>
     /// <returns></returns>
-    public static DataTable GetArticleTagByUserId(int userID, OleDbConnection conn)
+    public static OleDbDataAdapter GetArticleTagByUserId(int userID, string type, OleDbConnection conn)
     {
         try
         {
             string sql = String.Format(GET_USER_ARTICLE_TAG_BY_USERID, userID);
-            OleDbCommand cmd = new OleDbCommand(sql, conn);
-            OleDbDataReader reader = cmd.ExecuteReader();
-            DataTable TagTable = null;
-            if (reader.Read())
+            if (type != TOTAL) // 如果不是原创则添加过滤条件
             {
-                TagTable = new DataTable();
-                TagTable.Load(reader);
+                sql += String.Format(ADD_TYPE, type);
             }
-            return TagTable;
+            OleDbDataAdapter tagData = new OleDbDataAdapter(sql, conn);
+            return tagData;
         }
         catch (Exception)
         {
@@ -52,16 +55,22 @@ public class MyPostUtils
     }
 
     /// <summary>
-    /// 根据用户ID获取用户的所有文章数量
+    /// 根据用户ID和指定类型[Type]获取用户的所有文章数量
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="conn"></param>
     /// <returns></returns>
-    public static int GetUserArticleCountByUserId(int userId, OleDbConnection conn)
+    public static int GetUserArticleCountByUserId(int userId, string type, OleDbConnection conn)
     {
         try
         {
             string sql = String.Format(GET_USER_ARTICLE_COUNT_BY_USERID, userId);
+
+            if (type != TOTAL) // 如果不是原创则添加过滤条件
+            {
+                sql += String.Format(ADD_TYPE, type);
+            }
+            
             OleDbCommand cmd = new OleDbCommand(sql, conn);
             OleDbDataReader reader = cmd.ExecuteReader();
             int count = 0;
@@ -85,11 +94,18 @@ public class MyPostUtils
     /// <param name="userId"></param>
     /// <param name="conn"></param>
     /// <returns></returns>
-    public static OleDbDataReader GetMyPostByOders(int startIndex, int endIndex, int userId, OleDbConnection conn)
+    public static OleDbDataReader GetMyPostByOders(int startIndex, int endIndex, int userId, 
+        string type, string tag, OleDbConnection conn)
     {
         try
         {
-            string sql = String.Format(GET_POST_INFO_BY_ORDERS, startIndex, endIndex, userId);
+            string typeStr = "";
+            string tagStr = "";
+            // 添加过滤条件
+            if (type != TOTAL) typeStr = String.Format(ADD_TYPE, type);
+            if (tag != TOTAL && tag != "") tagStr = String.Format(ADD_TAG, tag);
+
+            string sql = String.Format(GET_POST_INFO_BY_ORDERS, startIndex, endIndex, userId , typeStr, tagStr);
             OleDbCommand cmd = new OleDbCommand(sql, conn);
             return cmd.ExecuteReader();
         }

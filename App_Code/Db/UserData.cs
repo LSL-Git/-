@@ -19,11 +19,51 @@ public class UserData
     private const string USER_LOGIN = "SELECT * FROM [User] WHERE [userName] = '{0}' AND [userPsw] = '{1}'";
     // 通过用户名获取用户所有信息
     private const string GET_USERINFO_BY_USERNAME = " SELECT * FROM [User] WHERE [userName] = '{0}'";
+    // 通过用户ID获取用户所有信息
+    private const string GET_USERINFO_BY_USERID = " SELECT * FROM [User] WHERE [userID] = {0} ";
     // 更新用户信息
     private const string UPDATE_USERINFO = "UPDATE [User] SET userName = '{0}', userTel = '{1}', userEmail = '{2}'"
         + ", sex = '{3}', education = '{4}', birth = '{5}', sketch = '{6}', img = '{7}' WHERE userName = '{8}'";
     // 更新用户密码
     private const string CHANGE_PASSWORD_BY_USERNAME = " UPDATE [User] SET [userPsw] = '{0}' WHERE [userName] = '{1}' ";
+
+    /// <summary>
+    /// 根据userID获取用户信息
+    /// </summary>
+    /// <param name="userID"></param>
+    /// <param name="conn"></param>
+    /// <returns></returns>
+    public static User GetUserInfoByUserID(int userID, OleDbConnection conn)
+    {
+        string sql = String.Format(GET_USERINFO_BY_USERID, userID);
+        OleDbCommand cmd = new OleDbCommand(sql, conn);
+        OleDbDataReader reader = cmd.ExecuteReader();
+        if (reader.Read())
+        {
+            User userInfo = new User();
+            userInfo.userID = (int)reader["userID"];
+            userInfo.userName = reader["userName"] + "";
+            userInfo.userPsw = reader["userPsw"] + "";
+            userInfo.userTel = reader["userTel"] + "";
+            userInfo.userEmail = reader["userEmail"] + "";
+            userInfo.userEdu = reader["education"] + "";
+            userInfo.userSex = reader["sex"] + "";
+            userInfo.userBirth = reader["birth"] + "";
+            userInfo.userSke = reader["sketch"] + "";
+            userInfo.Admin = reader["admin"] + "";
+            userInfo.Img = reader["img"] + "";
+            userInfo.Exp = (int)reader["userExp"];
+            userInfo.register_time = reader["register_time"] + "";
+            reader.Close();
+            return userInfo;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
 
     /// <summary>
     /// 修改用户密码

@@ -16,6 +16,7 @@ public partial class User_MyEditor : System.Web.UI.Page
     string article_tag = "";
     string userName = "";
     string draftId = "";
+    string articleId = "";
 
     /// <summary>
     /// 获取页面写入信息
@@ -26,6 +27,10 @@ public partial class User_MyEditor : System.Web.UI.Page
         article_content = content.Text.ToString();
         article_type = ArticleTypeList.SelectedValue;
         article_tag = ArticleTagList.SelectedValue;
+        //if (article_content.Length < 50)
+        //{
+        //    Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('内容长度过短！')", true);
+        //}
     }
 
     /// <summary>
@@ -99,17 +104,45 @@ public partial class User_MyEditor : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// 加载文章信息
+    /// </summary>
+    /// <param name="articleID"></param>
+    private void LoadArticle(int articleID)
+    {
+        DBHelper mdb = new DBHelper();
+        mdb.Connect();
+        DataSet articleInfo = ArticleData.GetArticleInfoByArticleID(articleID, mdb.GetConn); // 读取数据库，获取文章信息
+        mdb.Disconnect();
+
+        foreach (DataRow row in articleInfo.Tables["ArticleTable"].Rows)
+        {
+            txtTitle.Text = row["Title"].ToString();
+            content.Text = row["Content"].ToString();
+            ArticleTypeList.Text = row["Type"].ToString();
+            ArticleTagList.Text = row["Tag"].ToString();            
+        }
+
+        butPublish.Text = "保存";
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         UserInfo();
         // 获取草稿id
-        draftId = Request["draftId"];        
+        draftId = Request["draftId"];
+        articleId = Request["ArticleId"];
 
         if (!IsPostBack)
         {
             FillAritcleTypeList();
 
-            if (draftId != null && draftId != "" && Regex.IsMatch(draftId, @"^\d+$"))
+            if (articleId != null && articleId != "" && Regex.IsMatch(articleId, @"^\d+$"))
+            {
+                // 加载文章
+                LoadArticle(int.Parse(articleId));
+            }
+            else if (draftId != null && draftId != "" && Regex.IsMatch(draftId, @"^\d+$"))
             {
                 // 加载草稿
                 LoadDraft(int.Parse(draftId));
@@ -136,31 +169,47 @@ public partial class User_MyEditor : System.Web.UI.Page
             articleInfo.Tag = article_tag;
             articleInfo.Pub_time = DateUtils.GetNowTime();
             articleInfo.Juri = "待审核"; // 默认'待审核'->'已审核'
-            articleInfo.State = "正常";
+            articleInfo.State = "可评论";
 
-            if (ArticleHelper.InsertNewArticle(articleInfo)) // 判断发表结果
+            switch (butPublish.Text)
             {
-                // 获取刚保存的文章的相关信息
-                Article article = ArticleHelper.GetTheNewArticleByUserId(articleInfo.User_id);
-                if (article != null)
-                {
-                    // 创建新的文章其他信息表，并保存
-                    ArticleInfo articleIn = new ArticleInfo();
-                    articleIn.Comment_time = DateUtils.GetNowTime();
-                    ArticleInfoHelper.InsertArticleInfoByarticleId(article.ID, articleIn);
-                }
+                case "发表":
+                    if (ArticleHelper.InsertNewArticle(articleInfo)) // 判断发表结果
+                    {
+                        // 获取刚保存的文章的相关信息
+                        Article article = ArticleHelper.GetTheNewArticleByUserId(articleInfo.User_id);
+                        if (article != null)
+                        {
+                            // 创建新的文章其他信息表，并保存
+                            ArticleInfo articleIn = new ArticleInfo();
+                            articleIn.Comment_time = DateUtils.GetNowTime();
+                            ArticleInfoHelper.InsertArticleInfoByarticleId(article.ID, articleIn);
+                        }
+                        // 用户发表文章数 +1
+                        UserArticleInfoHelper.SetNumByUserId(articleInfo.User_id, 1);
 
-                //if (UserArticleInfoHelper.GetArticleInfoByUserId(articleInfo.User_id) == null)
-                //{}
-                
-                UserArticleInfoHelper.SetNumByUserId(articleInfo.User_id, 1);                
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')"  +
+                            ";window.location.href='MyPost.aspx?type=3'", true);
 
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('发表成功！')", true);
-            }
-            else
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('发表失败！')", true);
-            }
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')", true);
+                    }
+                    break;
+
+                case "保存":
+                    if (ArticleHelper.UpdateArticle(articleInfo, user.userID, int.Parse(articleId)))
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')" +
+                            ";window.location.href='MyPost.aspx?type=3'", true);
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "", "alert('" + butPublish.Text + "成功！')", true);
+                    }
+                    break;
+            }          
         }
     }
 

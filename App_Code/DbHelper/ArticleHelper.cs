@@ -12,6 +12,25 @@ public class ArticleHelper
     private static Object mLockObj = new Object();
 
     /// <summary>
+    /// 根据文章id和用户id更新文章信息
+    /// </summary>
+    /// <param name="article"></param>
+    /// <param name="userId"></param>
+    /// <param name="articleId"></param>
+    /// <returns></returns>
+    public static bool UpdateArticle(Article article, int userId, int articleId)
+    {
+        bool result = false;
+        lock (mLockObj)
+        {
+            mdb.Connect();
+            result = ArticleData.UpdateArticleByUserIDArticleID(userId, articleId, article, mdb.GetConn);
+            mdb.Disconnect();
+        }
+        return result;
+    }
+
+    /// <summary>
     /// 根据用户ID获取该用户的最新的文章信息
     /// </summary>
     /// <param name="userId"></param>

@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/UserInfoPage.master" AutoEventWireup="true" CodeFile="UserInfo.aspx.cs" Inherits="User_UserInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="../Styles/UserInfo.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
-    <link href="../Styles/UserInfo.css" rel="stylesheet" type="text/css" />
+    </asp:ScriptManager>    
 
     <div class="user_info_box">
         <asp:Image ID="userIcon" runat="server" CssClass="img" Height="100px" Width="100px" ImageUrl="~/Image/userIcon/userIcon.jpeg" />
@@ -14,7 +14,7 @@
             <li>用户名：<asp:TextBox ID="txtUserName" runat="server" Enabled="False" 
                     CssClass="textbox"></asp:TextBox>
             </li>
-             <li>积分：<asp:TextBox ID="UserExp" runat="server" Enabled="False" 
+             <li>积&nbsp;分：&nbsp;&nbsp;<asp:TextBox ID="UserExp" runat="server" Enabled="False" 
                     CssClass="textbox" ForeColor="#FF9900"></asp:TextBox>
             </li>
             <li>手机号：<asp:TextBox ID="txtUserTel" runat="server" Enabled="False" 

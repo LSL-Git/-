@@ -1,64 +1,64 @@
-﻿.pagination
-        {
-            text-align: center;
-            margin-top: 20px;
-            display: inline-block;
-            padding-left: 0;
-        }
-        .pagination span 
-        {
-            display: inline-block;
-            width: 30px;
-            height: 25px;
-            margin: 0 1px;
+﻿.pagination {
+    text-align: center;
+    margin-top: 20px;
+    display: inline-block;
+    padding-left: 0;
+}
+
+    .pagination span {
+        display: inline-block;
+        width: 30px;
+        height: 25px;
+        margin: 0 1px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        line-height: 25px;
+        border-radius: 3px;
+    }
+
+        .pagination span a {
             text-decoration: none;
-            border: 1px solid #ccc;
-            line-height: 25px;
-            border-radius: 3px;
         }
-        .pagination span a 
-        {
-            text-decoration:none;
-        }
-        .pagination a[disabled]  
-        {
-            color: #777;
-            cursor: not-allowed;
-            background-color: #fff;
-            border-color: #ddd;
-        }
-        .pagination span.active
-        {
-            z-index: 2;
-            color: #fff;
-            cursor: default;
-            background-color: #337ab7;
-            border-color: #337ab7;
-        }
-        
-        .repeater_table
-        {
-            width: 95%;  
-            margin: 10px auto; 
-            border-spacing: 0;
-        }
-        
-        .repeater_table_thead_tr
-        {
-            height: 40px; 
-            background: #dfdfdf; 
-            color: #042532; 
-            font-size: 14px;
-        }
-        .repeater_table_tbody_tr
-        {
-            height: 40px; 
-            text-align: center; 
-            color: #696868; 
-            font-size: 13px;
-        }
-        
-        table tr td 
-        {
-            border-bottom: 1px solid #c5c5c5;
-        }
+
+    .pagination a[disabled] {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+
+    .pagination span.active {
+        z-index: 2;
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+.repeater_table {
+    width: 95%;
+    margin: 10px auto;
+    border-spacing: 0;
+}
+
+.repeater_table_thead_tr {
+    height: 40px;
+    background: #dfdfdf;
+    color: #042532;
+    font-size: 14px;
+}
+
+.repeater_table_tbody_tr {
+    height: 40px;
+    text-align: center;
+    color: #696868;
+    font-size: 13px;
+}
+
+    .repeater_table_tbody_tr:hover {
+        background: #fff9f0;
+    }
+
+table tr td {
+    border-bottom: 1px solid #c5c5c5;
+}

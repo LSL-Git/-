@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="UserPage.master.cs" Inherits="Views_UserPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ArticleInfo.master.cs" Inherits="Views_UserPage" %>
 
 <%@ Register src="Footer.ascx" tagname="Footer" tagprefix="uc1" %>
 
@@ -35,36 +35,38 @@
                         <asp:HyperLink ID="link_login" runat="server" NavigateUrl="~/User/Login.aspx" 
                             CssClass="hyperlink">登录</asp:HyperLink></li>
                     <li>
-                        <asp:ImageButton ID="UserIcon" runat="server" Height="30px"  CssClass="userIcon"
-                            ImageUrl="~/Image/userIcon/userIcon.jpeg" Width="30px" ToolTip="个人中心" 
-                            BorderStyle="Solid" PostBackUrl="~/User/UserInfo.aspx" Visible="false" />
+                        <asp:ImageButton ID="UserIcon" runat="server" Height="30px"  CssClass="userIcon" Visible="false"
+                            ImageUrl="~/Image/userIcon/userIcon.jpeg" Width="30px" ToolTip="个人中心" BorderStyle="Solid" PostBackUrl="~/User/UserInfo.aspx" />
                     </li>
                     
                     
                     <li>
-                        <asp:TextBox ID="txtSearch" runat="server" CssClass="input_search"></asp:TextBox>
+                        <%--<asp:TextBox ID="txtSearch" runat="server" CssClass="input_search"></asp:TextBox>
                         <asp:Button ID="butSearch" runat="server" Text="搜索" 
-                            CssClass="input_search_but" />
+                            CssClass="input_search_but" />--%>
                     </li>                
                 </ul>
             </div>
         </div>        
     </div>
 
-    <div class="main_content" style="height: 700px;">
+    <div class="main_content" style="height: auto; overflow: hidden; /*min-height: 888px;*/">
         <div class="left_content clearfix">
-            <asp:HyperLink ID="HyperLink10" runat="server" CssClass="menu hyperlink">自选</asp:HyperLink>
+            <%--<asp:HyperLink ID="HyperLink10" runat="server" CssClass="menu hyperlink">自选</asp:HyperLink>
             <asp:HyperLink ID="HyperLink5" runat="server" CssClass="menu hyperlink">热门</asp:HyperLink>
             <asp:HyperLink ID="HyperLink6" runat="server" CssClass="menu hyperlink">精品</asp:HyperLink>
             <asp:HyperLink ID="HyperLink7" runat="server" CssClass="menu hyperlink">原创</asp:HyperLink>
             <asp:HyperLink ID="HyperLink8" runat="server" CssClass="menu hyperlink">排行</asp:HyperLink>
-            <asp:HyperLink ID="HyperLink9" runat="server" CssClass="menu hyperlink">其他</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink9" runat="server" CssClass="menu hyperlink">其他</asp:HyperLink>--%>
+
+            <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">        
+            </asp:ContentPlaceHolder>
         </div>
 
-        <div class="right_content">
-            <div class="rigth_content_top">
-                备用区
+        <div class="right_content" style="height: auto; /*min-height: 888px;*/">
+            <div class="rigth_content_top">                
             </div>
+
             <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">        
             </asp:ContentPlaceHolder>
         </div>      
