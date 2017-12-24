@@ -39,6 +39,26 @@ public class CommentData
     }
 
     /// <summary>
+    /// 获取当前文章评论楼层数
+    /// </summary>
+    /// <param name="articleID"></param>
+    /// <param name="conn"></param>
+    /// <returns></returns>
+    public static int GetFloorByArticleId(int articleID, OleDbConnection conn)
+    {
+        try
+        {
+            string sql2 = String.Format(GET_FLOOR_NUM, articleID);
+            OleDbCommand cmd2 = new OleDbCommand(sql2, conn);
+            return (int)cmd2.ExecuteScalar();
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
+    }
+
+    /// <summary>
     /// 给文章添加新评论
     /// </summary>
     /// <param name="comment"></param>
@@ -48,9 +68,7 @@ public class CommentData
     {
         try
         {            
-            string sql2 = String.Format(GET_FLOOR_NUM, comment.ArticleID);
-            OleDbCommand cmd2 = new OleDbCommand(sql2, conn);
-            int newFloor = (int)cmd2.ExecuteScalar() + 1;
+            int newFloor = GetFloorByArticleId(comment.ArticleID, conn) + 1;
 
             string sql = String.Format(INSERT_NEW_COMMMENT, comment.ArticleID, comment.Comm_userID, 
                             comment.Comm_Content, comment.Comm_Time, newFloor);

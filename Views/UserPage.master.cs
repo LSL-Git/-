@@ -14,18 +14,22 @@ public partial class Views_UserPage : System.Web.UI.MasterPage
         if (Request.Cookies["USERINFO"] != null)
         {
             userName = HttpUtility.UrlDecode(Request.Cookies["USERINFO"]["NAME"]);
-            User user = UserHelper.GetUserInfoByUserName(userName); // 获取用户信息
-
-            UserIcon.ImageUrl = user.Img; // 获取用户头像
-            UserIcon.Visible = true; // 显示用户头像
-
-            if (userName.Length > 6)
+            if (userName != null && userName != "")
             {
-                userName = userName.Substring(0, 6) + "...";
+                User user = UserHelper.GetUserInfoByUserName(userName); // 获取用户信息
+                if (user != null)
+                    UserIcon.ImageUrl = user.Img; // 获取用户头像
+
+                UserIcon.Visible = true; // 显示用户头像
+
+                if (userName.Length > 6)
+                {
+                    userName = userName.Substring(0, 6) + "...";
+                }
+                link_login.Text = userName;
+                link_login.NavigateUrl = "~/User/UserInfo.aspx";
+                link_register.Text = "注销";
             }
-            link_login.Text = userName;
-            link_login.NavigateUrl = "~/User/UserInfo.aspx";
-            link_register.Text = "注销";
         }
     }
 

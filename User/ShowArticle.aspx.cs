@@ -94,6 +94,32 @@ public partial class User_ShowArticle : System.Web.UI.Page
     }
 
     /// <summary>
+    /// 判断该帖是否可以评论
+    /// </summary>
+    /// <param name="state"></param>
+    private void IsComment(string state)
+    {
+        switch (state)
+        {
+            case "可评论":
+                FloorList.Enabled = true;
+                Bnt_Comm.Enabled = true;
+                content.Enabled = true;
+                LMsg2.Visible = false;
+                break;
+
+            case "禁评论":
+                FloorList.Enabled = false;
+                Bnt_Comm.Enabled = false;
+                content.Enabled = false;
+                LMsg2.Text = "该帖禁止评论！";
+                LMsg2.ForeColor = System.Drawing.ColorTranslator.FromHtml("#f8b900");
+                LMsg2.Visible = true;
+                break;
+        }
+    }
+
+    /// <summary>
     /// 加载文章信息
     /// </summary>
     /// <param name="articleID"></param>
@@ -115,6 +141,8 @@ public partial class User_ShowArticle : System.Web.UI.Page
             ArticleContent.Text = row["Content"].ToString();
             Pub_Time.Text = row["Pub_Time"].ToString();
             userID = row["UserID"].ToString();
+            // 判断该帖是否可以评论
+            IsComment(row["State"].ToString());
         }
 
         if (userID != null && userID != "")
@@ -122,6 +150,20 @@ public partial class User_ShowArticle : System.Web.UI.Page
             // 加载作者信息
             LoadUserInfo(int.Parse(userID));
         }
+    }
+
+    /// <summary>
+    /// 加载可回复的楼层
+    /// </summary>
+    /// <param name="floor"></param>
+    private void LoadFloorList(int floor)
+    {
+        for (int i = 1; i <= floor; i++)
+        {   ListItem floorItemt = new ListItem();
+            floorItemt.Text = i + "楼";
+            floorItemt.Value = i + "";
+            FloorList.Items.Add(floorItemt);
+        }        
     }
 
     /// <summary>
@@ -134,6 +176,16 @@ public partial class User_ShowArticle : System.Web.UI.Page
         mdb.Connect();
         Repeater_Comment.DataSource = CommentData.GetAllCommentByArticleID(articleID, mdb.GetConn);
         Repeater_Comment.DataBind();
+        int Floor = CommentData.GetFloorByArticleId(articleID, mdb.GetConn);
+        if (Floor > 0 && !IsPostBack)
+        {
+            LoadFloorList(Floor); // 加载可回复的楼层
+            LMsg2.Visible = false;
+        }
+        else
+        {
+            LMsg2.Visible = true;
+        }
         mdb.Disconnect();
     }
 

@@ -116,8 +116,7 @@
 
                 <asp:Label ID="Label1" runat="server" Text="发表评论" CssClass="comm_name"></asp:Label>
                 <span class="span2">回复：<asp:DropDownList ID="FloorList" runat="server">
-                    <asp:ListItem Selected="True">楼主</asp:ListItem>
-                    <asp:ListItem>1楼</asp:ListItem>
+                    <asp:ListItem Selected="True" Value="0">楼主</asp:ListItem>
                 </asp:DropDownList></span>
             </div>
             <div class="comm_content2">

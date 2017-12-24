@@ -36,7 +36,7 @@
                             CssClass="hyperlink">登录</asp:HyperLink></li>
                     <li>
                         <asp:ImageButton ID="UserIcon" runat="server" Height="30px"  CssClass="userIcon"
-                            ImageUrl="~/Image/userIcon/userIcon.jpeg" Width="30px" ToolTip="个人中心" 
+                            ImageUrl="~/Image/userIcon/userIcon.jpeg" Width="30px" 
                             BorderStyle="Solid" PostBackUrl="~/User/UserInfo.aspx" Visible="false" />
                     </li>
                     
