@@ -49,6 +49,14 @@ public partial class User_UserInfo : System.Web.UI.Page
             txtUserSketch.Text = userInfo.userSke;
             userIcon.ImageUrl = userInfo.Img;
             UserExp.Text = userInfo.Exp + "";
+            if (userInfo.Admin.Equals("admin"))
+            {
+                butAdmin.Visible = true;
+            }
+            else
+            {
+                butAdmin.Visible = false;
+            }
         }
         else
         {
@@ -222,5 +230,10 @@ public partial class User_UserInfo : System.Web.UI.Page
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
         calendar.Visible = !calendar.Visible;
+    }
+
+    protected void butAdmin_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/Admin/CheckArticle.aspx");
     }
 }

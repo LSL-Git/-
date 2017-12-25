@@ -4,68 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link href="../Styles/RepeaterTable.css" rel="stylesheet" />
-    <style type="text/css">
-        .but_Del {
-            display: block;
-            float: right;
-            margin-right: 10px;
-        }
-
-        .bn {
-            margin-right: 15px;
-            color: antiquewhite;
-        }
-
-        .but_Cont {
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .span1 {
-            color: #747474;
-            font-size: 13px;
-        }
-
-        .msg_box {
-            width: 95%;
-            height: auto;
-            margin: 0 auto;
-        }
-
-            .msg_box:hover {
-                background: #f6f6f4;
-            }
-
-        .bntDelAll {
-            float: right;
-            margin: 0 15px;
-            border: none;
-            cursor: pointer;
-            padding: 3px;
-            background: #dfdfdf;
-            box-shadow: 3px 1px 1px #ccc;
-        }
-
-            .bntDelAll:hover {
-                background: #f6f6f4;
-            }
-
-        .msglist {
-            padding: 3px;
-        }
-
-        .main_content {
-            height: auto !important;
-            overflow: hidden;
-            padding-bottom: 40px;
-        }
-
-            .main_content .right_content {
-                padding-bottom: 40px;
-                height: auto !important;
-                min-height: 888px;
-            }
-    </style>
+    <link href="../Styles/MyMessage.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>

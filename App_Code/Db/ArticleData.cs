@@ -111,7 +111,7 @@ public class ArticleData
             int row = cmd.ExecuteNonQuery();
             return row > 0;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             //string s = ex.Message;
             return false;

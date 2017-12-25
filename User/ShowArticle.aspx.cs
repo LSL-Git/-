@@ -132,6 +132,8 @@ public partial class User_ShowArticle : System.Web.UI.Page
         
         foreach (DataRow row in articleInfo.Tables["ArticleTable"].Rows)
         {
+            this.Page.Title = row["Title"].ToString(); // 这是页面标题
+
             Article_Title = row["Title"].ToString();
             ArticleTitle.Text = Article_Title;
             ArticleType.Text = row["Type"].ToString();

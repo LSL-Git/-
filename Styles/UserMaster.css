@@ -25,6 +25,7 @@ ul li {
     width: 100%;
     height: 70px;
     background: #ccc;
+    box-shadow: 1px 1px 3px #808080 !important;
 }
 
 .header_box {
@@ -98,7 +99,8 @@ ul li {
 
     .main_content .left_content {
         width: 21%;
-        height: 540px;
+        /*height: 540px;*/
+        padding-bottom: 40px;
         float: left;
     }
 
@@ -113,14 +115,19 @@ ul li {
     border-radius: 7px;
     background: #038bcb;
     color: #fff;
+    box-shadow: 1px 1px 3px #808080 !important;
 }
+
+    .menu:hover {
+        background: #0579b0;
+    }
 
 .main_content .right_content {
     width: 77%;
     height: 700px;
     background: #fff;
     float: right;
-    box-shadow: 1px 1px 6px #808080 !important;
+    box-shadow: 1px 1px 3px #808080 !important;
 }
 
     .main_content .right_content .rigth_content_top {
@@ -137,6 +144,14 @@ ul li {
     font-family: '微软雅黑';
 }
 
+.ltitle2 {
+    float: left;
+    margin-left: 50px;
+    font-size: 17px;
+    line-height: 40px;
+    font-family: '微软雅黑';
+}
+
 
 .userIcon {
     border: 1px solid #038bcb;
@@ -146,3 +161,38 @@ ul li {
     margin-right: -20px;
     cursor: pointer;
 }
+
+
+.left_menu {
+    width: 100%;
+}
+
+    .left_menu ul {
+        width: 100% !important;
+        display: block;
+    }
+
+        .left_menu ul li {
+            display: block;
+            width: 100%;
+            height: 27px;
+            text-align: center;
+            font-family: '微软雅黑';
+            margin: 1px 0;
+            padding: 5px 0;
+            border-radius: 7px;
+            background: #038bcb;
+            color: #fff;
+            box-shadow: 1px 1px 3px #808080 !important;
+        }
+
+            .left_menu ul li:hover {
+                background: #0579b0;
+            }
+
+            .left_menu ul li a {
+                color: #fff;
+                display: block;
+                width: 100%;
+                height: 27px;
+            }

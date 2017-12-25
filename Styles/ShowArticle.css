@@ -217,6 +217,12 @@
     border-radius: 10px;
 }
 
+.comm_icon2 {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+}
+
 .comm_name {
     font-size: 17px;
     color: #7a7979;
